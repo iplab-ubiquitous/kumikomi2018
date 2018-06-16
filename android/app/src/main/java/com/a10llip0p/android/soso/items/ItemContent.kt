@@ -22,10 +22,11 @@ object ItemContent {
     val ITEM_MAP: MutableMap<String, Item> = HashMap()
 
     val CONTENT_LIST: List<String> = mutableListOf("トマト", "ナス", "ピーマン", "水", "カメラ")
+    val CONTENT_KEY_LIST: List<String> = mutableListOf("vegetables/tomato", "vegetables/eggplant", "vegetables/piment", "water", "camera")
 
     init {
-        CONTENT_LIST.forEachIndexed { index, s ->
-            addItem(createItem(index, s, s))
+        CONTENT_LIST.zip(CONTENT_KEY_LIST).forEachIndexed { index, s ->
+            addItem(createItem(index, s.first, s.second))
         }
     }
 

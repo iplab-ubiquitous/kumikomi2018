@@ -2,10 +2,15 @@ package com.a10llip0p.android.soso
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.a10llip0p.android.soso.items.ItemContent
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -21,6 +26,7 @@ class ItemDetailFragment : Fragment() {
      * The dummy content this fragment is presenting.
      */
     private var mItem: ItemContent.Item? = null
+    private val db = FirebaseDatabase.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +48,20 @@ class ItemDetailFragment : Fragment() {
 
         // Show the dummy content as text in a TextView.
         mItem?.let {
-            rootView.item_detail.text = it.details
+            if(it.details == "camera") {
+                //todo: カメラを選択した場合の処理
+            }
+            else {
+                db.child(it.details).addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        rootView.item_detail.text = p0.toString()
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                        Log.d("dbCancelled", p0.toException().toString())
+                    }
+                })
+            }
         }
 
         return rootView
