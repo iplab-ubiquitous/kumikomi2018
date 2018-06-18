@@ -4,7 +4,7 @@ var serviceAccount = require('./ubiq-f2dd6-firebase-adminsdk-ry3uk-5efc8e7c61.js
 
 
 var exec = require('child_process').exec;
-var COMMAND = 'sudo python motor_test.py';
+var COMMAND = 'sudo python motor_move.py';
 
 dir = '/sys/class/gpio/'
 admin.initializeApp( {
