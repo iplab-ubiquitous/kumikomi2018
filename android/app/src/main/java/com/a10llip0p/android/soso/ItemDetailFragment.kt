@@ -27,6 +27,7 @@ class ItemDetailFragment : Fragment() {
      */
     private var mItem: ItemContent.Item? = null
     private val db = FirebaseDatabase.getInstance().reference
+    private var vegetable: Vegetable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class ItemDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 mItem = ItemContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = mItem?.content
+                //activity?.toolbar_layout?.title = mItem?.content
             }
         }
     }
@@ -52,15 +53,19 @@ class ItemDetailFragment : Fragment() {
                 //todo: カメラを選択した場合の処理
             }
             else {
+                /*
+                vegetable = Vegetable()
                 db.child(it.details).addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(p0: DataSnapshot) {
-                        rootView.item_detail.text = p0.toString()
+                        //vegetable!!.data = p0
+                        rootView.item_detail.text = p0.children.last().child("humidity").value.toString()
                     }
 
                     override fun onCancelled(p0: DatabaseError) {
                         Log.d("dbCancelled", p0.toException().toString())
                     }
                 })
+                */
             }
         }
 

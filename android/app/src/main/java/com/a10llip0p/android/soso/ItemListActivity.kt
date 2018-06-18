@@ -1,6 +1,7 @@
 package com.a10llip0p.android.soso
 
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
@@ -39,11 +40,6 @@ class ItemListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
         if (item_detail_container != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -70,9 +66,9 @@ class ItemListActivity : AppCompatActivity() {
                 mOnClickListener = View.OnClickListener { v ->
                     val item = v.tag as ItemContent.Item
                     if (mTwoPane) {
-                        val fragment = ItemDetailFragment().apply {
+                        val fragment = TabFragment().apply {
                             arguments = Bundle().apply {
-                                putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                                putString(TabFragment.ARG_ITEM_ID, item.id)
                             }
                         }
                         mParentActivity.supportFragmentManager
@@ -81,7 +77,7 @@ class ItemListActivity : AppCompatActivity() {
                                 .commit()
                     } else {
                         val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                            putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                            putExtra(TabFragment.ARG_ITEM_ID, item.id)
                         }
                         v.context.startActivity(intent)
                     }

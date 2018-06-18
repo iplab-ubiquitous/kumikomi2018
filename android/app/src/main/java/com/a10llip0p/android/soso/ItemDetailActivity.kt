@@ -3,6 +3,7 @@ package com.a10llip0p.android.soso
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_item_detail.*
@@ -20,11 +21,6 @@ class ItemDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_item_detail)
         setSupportActionBar(detail_toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -40,10 +36,10 @@ class ItemDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = ItemDetailFragment().apply {
+            val fragment = TabFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ItemDetailFragment.ARG_ITEM_ID,
-                            intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID))
+                    putString(TabFragment.ARG_ITEM_ID,
+                            intent.getStringExtra(TabFragment.ARG_ITEM_ID))
                 }
             }
 
