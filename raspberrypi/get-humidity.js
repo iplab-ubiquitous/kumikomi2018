@@ -20,7 +20,7 @@ var initHandler = function() {
     var d_out = new Input('GPIO9');   //SPI_MISO
     var clk   = new Output('GPIO11'); //SPI_CSLK
     var cs    = new Output({ 'pin' : 'GPIO8', 'pullResistor' : gpio.PULL_UP });  //SPI_CE0
-    var interval = 5000; //インターバル（ミリ秒）
+    var interval = 500; //インターバル（ミリ秒）
 
     var clock = function(count) {
         for(var i = 0; i < count; i++) {
@@ -51,23 +51,26 @@ var initHandler = function() {
             }
         }
 
+        //0~100にスケール、小数点第一位まで
+        var humidity = Math.floor(val / 4096 * 100 * 10) / 10;
+        
         cs.write(HIGH); //end
 
         //結果出力
-        console.log('humidity : ', val);
+        console.log('raw value : ', val, ', humidity : ', humidity);
 
-        return val;
+        return humidity;
     };
 
     //firebaseに書き込み
     var setValue = function() {
         var db = admin.database();
-        var ref = db.ref("vegetables");
+        var ref = db.ref("tomato");
 
         var date = new Date();
         var time = date.toFormat("YYYYMMDDHH24MI"); //時刻取得
 
-        ref.child("tomato").push().set( { //push().setで一意のkeyを自動で作ってその下に各要素を追加
+        ref.push().set( { //push().setで一意のkeyを自動で作ってその下に各要素を追加
             "time": time,
             "humidity": readHumidity()
         } );
