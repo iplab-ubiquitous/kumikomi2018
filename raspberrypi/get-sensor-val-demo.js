@@ -110,7 +110,7 @@ var initHandler = function() {
 
         ref.push().set( { //push().setで一意のkeyを自動で作ってその下に各要素を追加
             "time": time,
-            "humidity": readHumidity()
+            "humidity": 20
         } );
     }
 
