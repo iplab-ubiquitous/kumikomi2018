@@ -124,9 +124,9 @@ var initHandler = function() {
         } );
     }
 
-    //一定時間ごとに実行
-    setInterval(writeHumidity, interval);
-    setInterval(writeWater, interval);
+    //実行
+    writeHumidity();
+    writeWater();
 
 };
 
