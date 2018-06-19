@@ -119,7 +119,7 @@ var initHandler = function() {
         var db = admin.database();
         var ref = db.ref("water");
 
-        ref.push().set( { //push().setで一意のkeyを自動で作ってその下に各要素を追加
+        ref.update( { //push().setで一意のkeyを自動で作ってその下に各要素を追加
             "amount": readWater()
         } );
     }
