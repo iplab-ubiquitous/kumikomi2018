@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
@@ -36,16 +37,30 @@ class ItemDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = TabFragment().apply {
-                arguments = Bundle().apply {
-                    putString(TabFragment.ARG_ITEM_ID,
-                            intent.getStringExtra(TabFragment.ARG_ITEM_ID))
+            Log.d("hogehoge", intent.getStringExtra(TabFragment.ARG_ITEM_ID))
+            if (intent.getStringExtra(TabFragment.ARG_ITEM_ID) == "3") {
+                val fragment = WaterFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(WaterFragment.ARG_ITEM_ID,
+                                intent.getStringExtra(WaterFragment.ARG_ITEM_ID))
+                    }
                 }
-            }
 
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.item_detail_container, fragment)
-                    .commit()
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.item_detail_container, fragment)
+                        .commit()
+            } else {
+                val fragment = TabFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(TabFragment.ARG_ITEM_ID,
+                                intent.getStringExtra(TabFragment.ARG_ITEM_ID))
+                    }
+                }
+
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.item_detail_container, fragment)
+                        .commit()
+            }
         }
     }
 

@@ -46,8 +46,6 @@ class HumidityFragment : Fragment() {
                     val humidityText = view.findViewById<TextView>(R.id.humidity_text)
                     val humidity = p0.children.last().child("humidity").value.toString()
                     if (humidity.toFloat() < 30f) {
-                        Log.d("hoge", "dry")
-                        Log.d("hoge", it.name)
                         when (it.name) {
                             "トマト" -> {
                                 view.findViewById<ImageView>(R.id.humidity_img).setImageResource(R.drawable.tomato_dry)
@@ -62,7 +60,6 @@ class HumidityFragment : Fragment() {
                         humidityText.text = "乾燥しています"
                     }
                     else if (humidity.toFloat() < 70f) {
-                        Log.d("hoge", "good")
                         when (it.name) {
                             "トマト" -> {
                                 view.findViewById<ImageView>(R.id.humidity_img).setImageResource(R.drawable.tomato_good)
@@ -77,7 +74,6 @@ class HumidityFragment : Fragment() {
                         humidityText.text = "いい感じです"
                     }
                     else {
-                        Log.d("hoge", "flood")
                         when (it.name) {
                             "トマト" -> {
                                 view.findViewById<ImageView>(R.id.humidity_img).setImageResource(R.drawable.tomato_flood)
